@@ -1,0 +1,22 @@
+//shuru ke  sum karlo normal loop lagakr then suru ke last se hatao aur peeche ka ek ek jodte jao
+
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int sum=0;
+        for(int i=0;i<k;i++)
+        {
+            sum=sum+cardPoints[i];
+        }
+        int maxi=sum;
+        int r=cardPoints.size()-1-k;
+        for(int j=cardPoints.size()-1;j>r;j--)
+        {
+            sum=sum-cardPoints[k-1]+cardPoints[j];
+            k=k-1;
+            maxi=max(sum,maxi);
+        }
+        return maxi;
+    }
+};
+
