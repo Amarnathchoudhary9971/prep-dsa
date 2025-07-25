@@ -1,0 +1,25 @@
+//normal approach  use kiye 255 ka array size bnaaya;
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int i = 0, j = 0;
+        int n = s.size();
+        int arr[256] = {0}; // Use 256 to support all ASCII characters
+        int maxi = 0;
+
+        while (j < n) {
+            if (arr[s[j]] == 0) {
+                arr[s[j]] = 1;
+                maxi = max(maxi, j - i + 1);
+                j++;
+            } else {
+                arr[s[i]] = 0;
+                i++;
+            }
+        }
+
+        return maxi;
+    }
+};
