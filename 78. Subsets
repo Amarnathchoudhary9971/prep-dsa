@@ -1,0 +1,31 @@
+//isme recurse use kiya hai::::
+//basically include exclude ka logic use kiya hai:::::
+
+
+
+class Solution {
+private: 
+void solve(int ind,vector<int> ds,vector<vector<int>> &output,vector<int>&nums)
+{
+    if(ind>=nums.size())
+    {
+        output.push_back(ds);
+        return;
+    }
+    // include:
+    ds.push_back(nums[ind]);
+    solve(ind+1,ds,output,nums);
+
+    // exclude
+    ds.pop_back();
+    solve(ind+1,ds,output,nums);
+}
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int ind=0;
+        vector<int> ds;
+        vector<vector<int>>output;
+         solve(ind,ds,output,nums);
+         return output;
+    }
+};
