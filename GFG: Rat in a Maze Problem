@@ -1,0 +1,64 @@
+//recussion and backtracking hamara main aim hona chahiye first step solve karo baaki khudpe khud hojaayga and ek visited array bhi lelo :
+
+
+
+#include <set>
+
+class Solution {
+private:
+    void find(vector<vector<int>>& maze, int i, int j, int n, vector<vector<int>>& visited, set<string>& ans, string& ds) {
+        if (i == n - 1 && j == n - 1) {
+            ans.insert(ds);
+            return;
+        }
+
+        // Move Down
+        if (i + 1 < n && maze[i + 1][j] == 1 && visited[i + 1][j] == 0) {
+            visited[i + 1][j] = 1;
+            ds.push_back('D');
+            find(maze, i + 1, j, n, visited, ans, ds);
+            ds.pop_back();
+            visited[i + 1][j] = 0;
+        }
+
+        // Move Right
+        if (j + 1 < n && maze[i][j + 1] == 1 && visited[i][j + 1] == 0) {
+            visited[i][j + 1] = 1;
+            ds.push_back('R');
+            find(maze, i, j + 1, n, visited, ans, ds);
+            ds.pop_back();
+            visited[i][j + 1] = 0;
+        }
+
+        // Move Up
+        if (i - 1 >= 0 && maze[i - 1][j] == 1 && visited[i - 1][j] == 0) {
+            visited[i - 1][j] = 1;
+            ds.push_back('U');
+            find(maze, i - 1, j, n, visited, ans, ds);
+            ds.pop_back();
+            visited[i - 1][j] = 0;
+        }
+
+        // Move Left
+        if (j - 1 >= 0 && maze[i][j - 1] == 1 && visited[i][j - 1] == 0) {
+            visited[i][j - 1] = 1;
+            ds.push_back('L');
+            find(maze, i, j - 1, n, visited, ans, ds);
+            ds.pop_back();
+            visited[i][j - 1] = 0;
+        }
+    }
+
+public:
+    vector<string> ratInMaze(vector<vector<int>>& maze) {
+        int n = maze.size();
+        set<string> ans;
+        if (maze[0][0] == 0) return {};
+
+        vector<vector<int>> visited(n, vector<int>(n, 0));
+        visited[0][0] = 1;
+        string ds = "";
+        find(maze, 0, 0, n, visited, ans, ds);
+        return vector<string>(ans.begin(), ans.end());
+    }
+};
