@@ -1,0 +1,27 @@
+//String matching normal approach:
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+                st.push(s[i]);
+            } else {
+                if (st.empty()) return false; // extra closing bracket
+
+                char top = st.top();
+                if ((s[i] == ')' && top == '(') ||
+                    (s[i] == '}' && top == '{') ||
+                    (s[i] == ']' && top == '[')) {
+                    st.pop();
+                } else {
+                    return false; // mismatched closing bracket
+                }
+            }
+        }
+
+        return 1; // true if all brackets matched
+    }
+};
