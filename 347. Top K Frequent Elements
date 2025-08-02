@@ -1,0 +1,31 @@
+//In this we use comperator operator::: first count with mapp and map ke elements ko vector dallenge than compare karwadenge:
+
+class Solution {
+public:
+    static bool cmp(pair<int, int>& a, pair<int, int>& b) {
+        return a.second > b.second; // descending order of frequency
+    }
+
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> freq;
+
+        // Step 1: Count frequency of each number
+        for (int num : nums) {
+            freq[num]++;
+        }
+
+        // Step 2: Move map entries into a vector
+        vector<pair<int, int>> freqVec(freq.begin(), freq.end());
+
+        // Step 3: Sort using custom comparator
+        sort(freqVec.begin(), freqVec.end(), cmp);
+
+        // Step 4: Pick top k frequent elements
+        vector<int> result;
+        for (int i = 0; i < k; ++i) {
+            result.push_back(freqVec[i].first);
+        }
+
+        return result;
+    }
+};
