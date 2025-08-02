@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+// Comparator to sort pairs in descending order
+bool compare(pair<int, int> a, pair<int, int> b) {
+    if (a.first == b.first)
+        return a.second > b.second;
+    return a.first > b.first;
+}
+
+int main() {
+    int n;
+    cout << "Enter the value of n: ";
+    cin >> n;
+
+    vector<pair<int, int>> p(n); // resize vector to hold n pairs
+
+    cout << "Enter " << n << " pairs:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> p[i].first >> p[i].second;
+    }
+
+    // Sort using custom comparator
+    sort(p.begin(), p.end(), compare);
+
+    cout << "\nSorted pairs in descending order:\n";
+    for (int i = 0; i < n; i++) {
+        cout << p[i].first << " " << p[i].second << endl;
+    }
+
+    return 0;
+}
