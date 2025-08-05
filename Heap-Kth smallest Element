@@ -1,0 +1,27 @@
+code link: https://www.geeksforgeeks.org/problems/kth-smallest-element5635/1
+//approach:priority queue banao max k tk insert karo or fir compare karao aur max ho top to pop karao.
+
+// User function template for C++
+
+class Solution {
+  public:
+    // arr : given array
+    // k : find kth smallest element and return using this function
+    int kthSmallest(vector<int> &arr, int k) {
+        // code here
+        priority_queue<int>maxHeap;
+        for(int i=0;i<k;i++)
+        {
+            maxHeap.push(arr[i]);
+        }
+        for(int i=k;i<arr.size();i++)
+        {
+            if(maxHeap.top()>arr[i])
+            {
+                maxHeap.pop();
+                maxHeap.push(arr[i]);
+            }
+        }
+        return maxHeap.top();
+    }
+};
