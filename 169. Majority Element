@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        map<int,int>mpp;
+        int n=nums.size()/2;
+        if(nums.size()==1)return nums[0];
+        for(int i=0;i<nums.size();i++)
+        {
+            int number=nums[i];
+            if(mpp.find(number)!=mpp.end())
+            {
+                if(mpp[number]>=n)
+                {
+                    return number;
+                }
+            }
+            mpp[nums[i]]++;
+        }
+        return 0;
+    }
+};
