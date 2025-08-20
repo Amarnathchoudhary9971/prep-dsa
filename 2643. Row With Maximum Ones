@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int maxCount = -1;
+        int rowIndex = -1;
+
+        for (int i = 0; i < mat.size(); i++) {
+            int count = 0;
+            for (int j = 0; j < mat[0].size(); j++) {
+                if (mat[i][j] == 1) {
+                    count++;
+                }
+            }
+
+            // Update if we find a larger count, or same count with smaller row index
+            if (count > maxCount || (count == maxCount && i < rowIndex)) {
+                maxCount = count;
+                rowIndex = i;
+            }
+        }
+
+        return {rowIndex, maxCount};
+    }
+};
