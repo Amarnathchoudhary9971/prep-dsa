@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> findDiagonalOrder(vector<vector<int>>& mat) {
+        map<int,vector<int>>mpp;
+        int m=mat.size();
+        int n=mat[0].size();
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                mpp[i+j].push_back(mat[i][j]);
+            }
+        }
+        bool toggle=true;
+        vector<int>ans;
+        for(auto it:mpp)
+        {
+            if(toggle)
+            {
+                reverse(it.second.begin(),it.second.end());
+            }
+            for(auto val:it.second)
+            {
+                ans.push_back(val);
+            }
+            toggle=!toggle;
+        }
+        return ans;
+    }
+};
