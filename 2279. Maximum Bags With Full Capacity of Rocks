@@ -1,0 +1,47 @@
+struct Bags{
+    int cap;
+    int  rocks;
+    int diff;
+};
+class Solution {
+    private:
+    static bool cmp(Bags a,Bags b)
+    {
+        return a.diff<b.diff;
+    }
+public:
+    int maximumBags(vector<int>& capacity, vector<int>& rocks, int additionalRocks) {
+        int N=capacity.size();
+        vector<Bags>arr(N);
+        for(int i=0;i<N;i++)
+        {
+            arr[i].cap=capacity[i];
+            arr[i].rocks=rocks[i];
+            int dif=capacity[i]-rocks[i];
+            arr[i].diff=dif;
+        }
+        sort(arr.begin(),arr.end(),cmp);
+        int i=0;
+        int value=additionalRocks;
+        while(value>0 && i<arr.size())
+        {
+            if(arr[i].diff==0)
+            {i++;}
+            if(value>=arr[i].diff)
+            {
+                value=value-arr[i].diff;
+                arr[i].diff=0;
+                i++;
+            }else{break;}
+        }
+        int count=0;
+        for(int j=0;j<N;j++)
+        {
+            if(arr[j].diff==0)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+};
