@@ -1,0 +1,52 @@
+class Solution {
+  public:
+    string smallestWindow(string &s, string &p) {
+        int mpp[256] = {0};
+        int i = 0;
+        int str = -1;
+        int maxLength = 1e9;
+
+        // Build frequency map of characters in p
+        while (i < p.size()) {
+            mpp[p[i]]++;
+            i++;
+        }
+
+        int j = 0;
+        i = 0;
+        int count = 0;
+
+        while (j < s.size()) {
+            // If the character is still needed
+            if (mpp[s[j]] > 0) {
+                count++;
+            }
+
+            // Always decrement frequency (needed or extra)
+            mpp[s[j]]--;
+            j++;
+
+            // When all characters are matched
+            while (count == p.size()) {
+                if (j - i < maxLength) {
+                    str = i;
+                    maxLength = j - i;
+                }
+
+                // Try to shrink the window
+                mpp[s[i]]++;
+
+                // If character becomes needed again
+                if (mpp[s[i]] > 0) {
+                    count--;
+                }
+
+                i++;
+            }
+        }
+
+        if (str == -1) return "";  // No valid window
+
+        return s.substr(str, maxLength);  // Correct usage
+    }
+};
