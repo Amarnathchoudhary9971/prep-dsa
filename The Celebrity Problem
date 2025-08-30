@@ -1,0 +1,29 @@
+class Solution {
+  public:
+  bool check(vector<vector<int>>&mat,int i)
+  {
+      for(int j=0;j<mat[0].size();j++)
+      {
+          if(j==i){continue;}
+          if(mat[i][j]!=0){return false;}
+      }
+      for(int j=0;j<mat.size();j++)
+      {
+          if(j==i){continue;}
+           if(mat[j][i]!=1){return false;}
+      }
+      return true;
+  }
+    int celebrity(vector<vector<int>>& mat) {
+        // code here
+        int ans=-1;
+        for(int i=0;i<mat[0].size();i++)
+        {
+            if(check(mat,i))
+            {
+                return i;
+            }
+        }
+        return ans;
+    }
+};
