@@ -1,0 +1,49 @@
+class Solution {
+  public:
+  int isPossible(int mid,vector<int>&arr,int k)
+  {
+      int pageSum=0;
+      int studentCount=1;
+      for(int i=0;i<arr.size();i++)
+      {
+          if(pageSum+arr[i]<=mid)
+          {
+              pageSum=pageSum+arr[i];
+          }else{
+              studentCount++;
+              if(studentCount>k || arr[i]>mid)
+              {
+                  return false;
+              }
+              pageSum=arr[i];
+          }
+      }
+      return true;
+      
+  }
+    int findPages(vector<int> &arr, int k) {
+        if(k>arr.size())
+        {
+            return -1;
+        }
+        // code here
+        int e=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            e=e+arr[i];
+        }
+        int s=0;
+        int mid=s+(e-s)/2;
+        while(s<=e)
+        {
+            if(isPossible(mid,arr,k))
+            {
+                e=mid-1;
+            }else{
+                s=mid+1;
+            }
+            mid=s+(e-s)/2;
+        }
+        return s;
+    }
+};
