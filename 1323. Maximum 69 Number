@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int maximum69Number (int num) {
+        string number =to_string(num);
+        int  i=0;
+        while(i<number.size())
+        {
+            if(number[i]=='6')
+            {
+                number[i]='9';
+                break;
+            }else{
+                i++;
+            }
+        }
+        return stoi(number);
+    }
+};
