@@ -1,0 +1,33 @@
+class Solution {
+  public:
+  void insertAtLast(int data,stack<int>&St,int size)
+  {
+      if(size==0)
+      {
+          St.push(data);
+          return;
+      }
+      size--;
+      int randomData=St.top();
+      St.pop();
+      insertAtLast(data,St,size);
+      St.push(randomData);
+  }
+  void solve(stack<int>&St,int size)
+  {
+      if(size==0)
+      {
+          return;
+      }
+      int data=St.top();
+      St.pop();
+       size--;
+      insertAtLast(data,St,size);
+      solve(St,size);
+  }
+    void reverse(stack<int> &St) {
+        // code here
+        int size=St.size();
+        solve(St,size);
+    }
+};
