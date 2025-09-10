@@ -1,0 +1,37 @@
+class Solution {
+  public:
+    string largestSwap(string &s) {
+        // code here
+        int i=0;
+        int j=s.size()-1;
+        int maxi=0;
+        while(i<j)
+        {
+            int left=s[i]-'0';
+            int k=s.size()-1;
+            int maxiNumber=left;
+            bool chalega=false;
+            while(k>=i)
+            {
+                int right=s[k]-'0';
+                if(right>maxiNumber)
+                {
+                    chalega=true;
+                    maxi=k;
+                    maxiNumber=right;
+                    k--;
+                }else{
+                    k--;
+                }
+                
+            }
+            if(chalega)
+            {
+                swap(s[i],s[maxi]);
+                return s;
+            }
+            i++;
+        }
+        return  s;
+    }
+};
